@@ -1,0 +1,2348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tristan Chiron — Portfolio GEII — Groupe G1</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f3c;
+    --navy-mid: #162a4a;
+    --navy-light: #1e3a5f;
+    --white: #ffffff;
+    --off-white: #f4f7fb;
+    --light-grey: #e8edf4;
+    --mid-grey: #8a9ab5;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --text: #1a2740;
+    --text-soft: #4a5e7a;
+    --concevoir: #7ab8e8;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--off-white);
+    color: var(--text);
+    font-family: 'Source Sans Pro', 'Segoe UI', system-ui, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 500;
+    padding: 0 56px;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--navy);
+    border-bottom: 2px solid var(--gold);
+  }
+  .nav-logo {
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--white);
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    padding-top: 64px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px;
+    background: var(--navy);
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; right: -1px;
+    width: 3px;
+    background: var(--gold);
+  }
+
+  .hero-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-name {
+    font-family: 'Georgia', serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.4s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-identity {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.55s forwards;
+  }
+  .hero-identity-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-identity-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.65);
+    font-weight: 600;
+  }
+  .hero-identity-value {
+    font-size: 0.95rem;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 22px;
+    max-width: 480px;
+    line-height: 1.75;
+    text-align: justify;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.7s forwards;
+  }
+
+  .hero-cta {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.85s forwards;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); }
+
+  .btn-ghost {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost::after { content: '→'; }
+
+  .hero-right {
+    background: var(--navy-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-image-block {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-portrait-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--navy-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-portrait-placeholder::before {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.12);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-portrait-placeholder::after {
+    content: '';
+    position: absolute;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.2);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .portrait-initials {
+    font-family: 'Georgia', serif;
+    font-size: 7rem;
+    font-weight: 700;
+    color: rgba(201,168,76,0.15);
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1;
+    user-select: none;
+  }
+
+  .hero-year {
+    position: absolute;
+    bottom: 32px;
+    right: 32px;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 1s forwards;
+  }
+  .hero-scroll span {
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: var(--gold);
+    opacity: 0.4;
+    transform-origin: top;
+    animation: scrollLine 2s ease-in-out infinite 1.5s;
+  }
+
+  /* SECTIONS */
+  section { padding: 96px 56px; position: relative; }
+
+  .section-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 600;
+  }
+  .section-tag::before {
+    content: '';
+    width: 24px; height: 2px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  /* numérotation discrète au-dessus du titre */
+  .section-num {
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    margin-bottom: 6px;
+    display: inline-block;
+  }
+
+  /* ABOUT */
+  .about {
+    background: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    border-bottom: 1px solid var(--light-grey);
+  }
+
+  .about-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-soft);
+    margin-top: 24px;
+    text-align: justify;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .stat-item {
+    border-top: 2px solid var(--gold);
+    padding-top: 16px;
+  }
+
+  .stat-number {
+    font-family: 'Georgia', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid-grey);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  /* SOMMAIRE / TDM */
+  .toc-section {
+    background: var(--white);
+    padding: 80px 56px;
+    border-bottom: 1px solid var(--light-grey);
+  }
+  .toc-section .section-tag { color: var(--gold); }
+  .toc-list {
+    margin-top: 32px;
+    max-width: 900px;
+    counter-reset: item;
+    list-style: none;
+  }
+  .toc-l1 {
+    font-family: 'Georgia', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-top: 22px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--light-grey);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+  }
+  .toc-l1 a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .toc-l1 a:hover { color: var(--gold); }
+  .toc-num {
+    color: var(--gold);
+    margin-right: 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.95rem;
+  }
+  .toc-l2 {
+    list-style: none;
+    margin-left: 24px;
+    margin-top: 8px;
+  }
+  .toc-l2 li {
+    padding: 6px 0;
+    color: var(--text-soft);
+    font-size: 0.95rem;
+  }
+  .toc-l2 a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .toc-l2 a:hover { color: var(--gold); }
+  .toc-l2 .toc-num {
+    color: var(--mid-grey);
+    font-size: 0.85rem;
+  }
+
+  /* COMPETENCE SECTION */
+  .competence-section {
+    background: var(--navy);
+    color: var(--white);
+    padding: 96px 56px;
+  }
+
+  .competence-section .section-tag { color: var(--gold); }
+  .competence-section .section-tag::before { background: var(--gold); }
+  .competence-section .section-title { color: var(--white); }
+  .competence-section .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .comp-intro {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    margin-top: 16px;
+    max-width: 680px;
+    line-height: 1.75;
+    text-align: justify;
+  }
+
+  /* TABLEAU D'AUTOÉVALUATION */
+  .autoeval-wrapper {
+    margin-top: 48px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow-x: auto;
+  }
+  .autoeval-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    min-width: 720px;
+  }
+  .autoeval-table thead th {
+    background: rgba(0,0,0,0.35);
+    color: var(--gold);
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 14px 12px;
+    text-align: center;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+  }
+  .autoeval-table thead th.col-ap { text-align: left; min-width: 240px; }
+  .autoeval-table thead th.col-niv { width: 90px; }
+  .autoeval-table tbody td {
+    padding: 14px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.75);
+    vertical-align: top;
+  }
+  .autoeval-table tbody tr.ac-row td {
+    background: rgba(201,168,76,0.10);
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+  .autoeval-table .ap-name {
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+  .autoeval-table .ap-detail {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+  .autoeval-table .niv-cell {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .autoeval-table .niv-cell.empty { color: rgba(255,255,255,0.15); }
+  .autoeval-link {
+    color: var(--gold);
+    font-size: 0.75rem;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(201,168,76,0.5);
+    padding-bottom: 1px;
+  }
+  .autoeval-link:hover { color: var(--gold-light); }
+  .autoeval-link.placeholder {
+    color: rgba(255,255,255,0.3);
+    border-bottom-style: dotted;
+    cursor: not-allowed;
+  }
+  .concevoir-section .autoeval-table thead th { color: var(--concevoir); border-bottom-color: rgba(122,184,232,0.3); }
+  .concevoir-section .autoeval-table tbody tr.ac-row td { background: rgba(122,184,232,0.10); color: var(--concevoir); }
+  .concevoir-section .autoeval-table .niv-cell { color: var(--concevoir); }
+  .concevoir-section .autoeval-link { color: var(--concevoir); border-bottom-color: rgba(122,184,232,0.5); }
+
+  /* Critères */
+  .criteres-attendus { margin-top: 56px; }
+
+  .sub-title {
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .criteres-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .critere-badge {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 16px 20px;
+    border-left: 3px solid var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+
+  .critere-code {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    white-space: nowrap;
+    padding-top: 2px;
+    min-width: 40px;
+  }
+
+  .critere-text {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+
+  /* AC Blocks */
+  .ac-block { margin-top: 52px; scroll-margin-top: 80px; }
+
+  .ac-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .ac-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .concevoir-section .ac-num { color: var(--concevoir); }
+
+  .ac-code {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    color: var(--navy);
+    background: var(--gold);
+    padding: 5px 12px;
+  }
+
+  .ac-title {
+    font-family: 'Georgia', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  /* AP Cards */
+  .ap-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+    scroll-margin-top: 80px;
+  }
+  .ap-card:hover { border-color: rgba(201,168,76,0.4); }
+
+  .ap-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 22px 24px 18px;
+  }
+
+  .ap-num {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid-grey);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .ap-num strong {
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    margin-right: 8px;
+    font-weight: 700;
+  }
+  .concevoir-section .ap-num strong { color: var(--concevoir); }
+
+  .ap-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .ap-items li {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .ap-items li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+
+  .maitrise-badge {
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    white-space: nowrap;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .maitrise-badge.bien {
+    background: rgba(16,90,60,0.35);
+    border: 1px solid rgba(40,180,100,0.4);
+    color: #6debb0;
+  }
+  .maitrise-badge.partiel {
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.45);
+    color: var(--gold);
+  }
+  .maitrise-badge.non {
+    background: rgba(160,30,30,0.2);
+    border: 1px solid rgba(220,60,60,0.4);
+    color: #f08080;
+  }
+
+  .ap-arg {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 18px 24px 22px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .arg-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .ap-arg p {
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.8;
+    text-align: justify;
+  }
+  .ap-arg p + p { margin-top: 10px; }
+
+  /* À approfondir / Perspectives */
+  .next-step {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: rgba(201,168,76,0.07);
+    border-left: 3px solid rgba(201,168,76,0.5);
+  }
+  .next-step-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .next-step p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    text-align: justify;
+    margin: 0;
+  }
+  .concevoir-section .next-step {
+    background: rgba(122,184,232,0.07);
+    border-left-color: rgba(122,184,232,0.5);
+  }
+  .concevoir-section .next-step-label { color: var(--concevoir); }
+
+  /* Images */
+  .ap-images {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 18px 24px 22px;
+    background: rgba(0,0,0,0.25);
+  }
+
+  .ap-images-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .ap-images-label .fig-num {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 2px 6px;
+    margin-right: 8px;
+    border-radius: 2px;
+    font-weight: 800;
+  }
+  .concevoir-section .ap-images-label .fig-num { background: var(--concevoir); }
+
+  .ap-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    max-width: 600px;
+  }
+
+  .ap-images-grid img {
+    width: 100%;
+    max-height: 200px;
+    border: 1px solid rgba(201,168,76,0.2);
+    object-fit: contain;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .ap-images-grid img:hover {
+    border-color: var(--gold);
+    transform: scale(1.02);
+  }
+
+  .ap-images-grid svg {
+    width: 100%;
+    max-width: 720px;
+    max-height: 420px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .ap-images-grid[style*="max-width:100%"],
+  .ap-images-grid[style*="max-width: 100%"] {
+    max-width: 720px !important;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.93);
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 20px; right: 28px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+  .lightbox-close:hover { opacity: 1; }
+
+  /* Concevoir section */
+  .concevoir-section {
+    background: var(--navy-light);
+  }
+  .concevoir-section .section-tag { color: var(--concevoir); }
+  .concevoir-section .section-tag::before { background: var(--concevoir); }
+  .concevoir-section .section-title em { color: var(--concevoir); }
+  .concevoir-section .ac-code { color: var(--navy); background: var(--concevoir); }
+  .concevoir-section .critere-badge { border-left-color: var(--concevoir); background: rgba(122,184,232,0.06); }
+  .concevoir-section .critere-code { color: var(--concevoir); }
+  .concevoir-section .arg-label { color: var(--concevoir); }
+  .concevoir-section .sub-title { color: var(--concevoir); }
+  .concevoir-section .ap-images-label { color: var(--concevoir); }
+  .concevoir-section .ap-images-grid img { border-color: rgba(122,184,232,0.2); }
+  .concevoir-section .ap-images-grid img:hover { border-color: var(--concevoir); }
+  .concevoir-section .section-num { color: var(--concevoir); }
+
+  .uncloud-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    padding: 10px 20px;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.45);
+    color: var(--gold);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .uncloud-btn:hover {
+    background: rgba(201,168,76,0.25);
+    color: var(--gold-light);
+  }
+
+
+  .fiche-algo {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .fiche-section { display: flex; flex-direction: column; gap: 10px; }
+  .fiche-titre {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .fiche-texte {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    text-align: justify;
+  }
+  .fiche-texte strong { color: var(--gold); font-weight: 600; }
+  .fiche-etats { display: flex; flex-direction: column; gap: 6px; }
+  .fiche-etat {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 8px 14px;
+    border-radius: 2px;
+  }
+  .etat-nom {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    min-width: 180px;
+    font-family: 'Courier New', monospace;
+  }
+  .etat-desc { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+  .etat-vert  { background: rgba(16,90,60,0.3); border-left: 3px solid #6debb0; }
+  .etat-vert .etat-nom { color: #6debb0; }
+  .etat-bleu  { background: rgba(24,95,165,0.25); border-left: 3px solid var(--concevoir); }
+  .etat-bleu .etat-nom { color: var(--concevoir); }
+  .etat-orange { background: rgba(186,117,23,0.2); border-left: 3px solid var(--gold); }
+  .etat-orange .etat-nom { color: var(--gold); }
+  .etat-coral { background: rgba(153,60,29,0.25); border-left: 3px solid #f0997b; }
+  .etat-coral .etat-nom { color: #f0997b; }
+  .etat-gris  { background: rgba(255,255,255,0.04); border-left: 3px solid rgba(255,255,255,0.2); }
+  .etat-gris .etat-nom { color: rgba(255,255,255,0.4); }
+  .fiche-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  .fiche-table th {
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+  }
+  .fiche-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.65);
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+  }
+  .fiche-table tr.securite td { color: #f0997b; }
+  .fiche-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .fiche-sorties { display: flex; gap: 12px; flex-wrap: wrap; }
+  .sortie-item {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 2px;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .sortie-etats { font-size: 0.72rem; font-weight: 400; opacity: 0.7; font-family: 'Courier New', monospace; }
+  .sortie-fermee { background: rgba(160,30,30,0.2); border: 1px solid rgba(220,60,60,0.3); color: #f08080; }
+  .sortie-ouverte { background: rgba(16,90,60,0.2); border: 1px solid rgba(40,180,100,0.3); color: #6debb0; }
+  .fiche-liste {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .fiche-liste li {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+    padding-left: 16px;
+    position: relative;
+    font-family: 'Courier New', monospace;
+  }
+  .fiche-liste li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* BILAN & PERSPECTIVES */
+  .bilan {
+    background: var(--navy-mid);
+    color: var(--white);
+    padding: 96px 56px;
+    border-top: 2px solid var(--gold);
+  }
+  .bilan .section-tag { color: var(--gold); }
+  .bilan .section-tag::before { background: var(--gold); }
+  .bilan .section-title { color: var(--white); }
+  .bilan .section-title em { color: var(--gold); font-style: italic; }
+  .bilan-intro {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    max-width: 720px;
+    margin-top: 16px;
+    line-height: 1.75;
+    text-align: justify;
+  }
+  .bilan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .bilan-card {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 26px;
+    transition: border-color 0.25s;
+  }
+  .bilan-card:hover { border-color: rgba(201,168,76,0.45); }
+  .bilan-card h3 {
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .bilan-card h3::before {
+    content: '';
+    width: 18px; height: 2px;
+    background: var(--gold);
+  }
+  .bilan-card.points-faibles h3 { color: #f0997b; }
+  .bilan-card.points-faibles h3::before { background: #f0997b; }
+  .bilan-card.objectifs h3 { color: var(--concevoir); }
+  .bilan-card.objectifs h3::before { background: var(--concevoir); }
+  .bilan-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .bilan-card li {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.65;
+    padding-left: 18px;
+    position: relative;
+  }
+  .bilan-card li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.85rem;
+    top: 1px;
+  }
+  .bilan-card.points-faibles li::before { color: #f0997b; }
+  .bilan-card.objectifs li::before { color: var(--concevoir); }
+
+  .bilan-conclusion {
+    margin-top: 56px;
+    padding: 32px 36px;
+    background: rgba(201,168,76,0.08);
+    border-left: 3px solid var(--gold);
+  }
+  .bilan-conclusion h3 {
+    font-family: 'Georgia', serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .bilan-conclusion p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.85;
+    text-align: justify;
+  }
+  .bilan-conclusion p + p { margin-top: 12px; }
+
+  /* CONTACT */
+  .contact {
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+    padding: 120px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 200px; height: 2px;
+    background: var(--gold);
+  }
+  .contact .section-tag { justify-content: center; color: var(--gold); }
+  .contact .section-tag::before { background: var(--gold); }
+  .contact .section-title { color: var(--white); margin-top: 12px; }
+
+  .contact-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 16px;
+    margin-bottom: 48px;
+  }
+
+  .contact-email {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-weight: 700;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,168,76,0.4);
+    padding-bottom: 4px;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  .contact-email:hover { border-color: var(--gold); color: var(--gold-light); }
+
+  .contact-phone {
+    display: block;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    margin-top: 8px;
+    transition: color 0.2s;
+  }
+  .contact-phone:hover { color: var(--white); }
+
+  /* FOOTER */
+  footer {
+    background: #070f1e;
+    padding: 28px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+  .footer-logo {
+    font-family: 'Georgia', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.04em;
+  }
+  .footer-copy {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollLine {
+    0%   { transform: scaleY(0); transform-origin: top; }
+    50%  { transform: scaleY(1); transform-origin: top; }
+    51%  { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* REVEAL */
+  .reveal { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.hidden { opacity: 0; transform: translateY(30px); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 40vh; }
+    .about { grid-template-columns: 1fr; }
+    nav { padding: 0 20px; }
+    .nav-links { gap: 16px; flex-wrap: wrap; }
+    section { padding: 64px 20px; }
+    .competence-section,
+    .bilan,
+    .toc-section { padding: 64px 20px; }
+    footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
+    .ap-top { flex-direction: column; }
+    .maitrise-badge { align-self: flex-start; }
+    .toc-l1 { flex-direction: column; align-items: flex-start; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Tristan Chiron — GEII G1</div>
+  <ul class="nav-links">
+    <li><a href="#about">Présentation</a></li>
+    <li><a href="#sommaire">Sommaire</a></li>
+    <li><a href="#concevoir">Concevoir</a></li>
+    <li><a href="#verifier">Vérifier</a></li>
+    <li><a href="#bilan">Bilan</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO / PAGE DE TITRE -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Portfolio — BUT GEII 2025–2026</div>
+    <h1 class="hero-name">Portfolio<br><em>GEII</em></h1>
+
+    <div class="hero-identity">
+      <div class="hero-identity-item">
+        <span class="hero-identity-label">Nom — Prénom</span>
+        <span class="hero-identity-value">Chiron Tristan</span>
+      </div>
+      <div class="hero-identity-item">
+        <span class="hero-identity-label">Groupe TP</span>
+        <span class="hero-identity-value">GEII — G1</span>
+      </div>
+      <div class="hero-identity-item">
+        <span class="hero-identity-label">Semestre</span>
+        <span class="hero-identity-value">S1 — BUT 1</span>
+      </div>
+      <div class="hero-identity-item">
+        <span class="hero-identity-label">Projet</span>
+        <span class="hero-identity-value">SAÉ1 — Barrière de passage à niveau</span>
+      </div>
+    </div>
+
+    <p class="hero-subtitle">Ce portfolio présente les compétences que j'ai développées en Génie Électrique et Informatique Industrielle pendant le semestre 1, à travers la SAÉ1&nbsp;: la conception, la réalisation et les tests d'une barrière automatique de passage à niveau pour train miniature.</p>
+    <div class="hero-cta">
+      <a href="#sommaire" class="btn-primary">Voir le sommaire</a>
+      <a href="#contact" class="btn-ghost">Me contacter</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-image-block">
+      <div class="hero-portrait-placeholder">
+        <span class="portrait-initials">TC</span>
+      </div>
+      <div class="hero-year">IUT de Nantes — 2025/2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="reveal">
+    <div class="section-tag">Qui suis-je</div>
+    <h2 class="section-title">Tristan<br>Chiron</h2>
+    <p class="about-text">Étudiant en première année de BUT Génie Électrique et Informatique Industrielle (GEII) à l'IUT de Nantes, groupe G1, j'apprends à concevoir, fabriquer et tester des cartes électroniques et des programmes embarqués. Ce portfolio retrace ce que j'ai fait pendant le semestre 1, à travers la SAÉ1&nbsp;: une barrière automatique de passage à niveau pour train miniature.</p>
+  </div>
+  <div class="about-stats reveal">
+    <div class="stat-item">
+      <div class="stat-number">1</div>
+      <div class="stat-label">Semestre — S1</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Compétences</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">6</div>
+      <div class="stat-label">Apprentissages critiques</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">12</div>
+      <div class="stat-label">Apprentissages détaillés</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOMMAIRE / TABLE DES MATIÈRES -->
+<section class="toc-section" id="sommaire">
+  <div class="reveal">
+    <div class="section-tag">Sommaire</div>
+    <h2 class="section-title">Table des matières</h2>
+  </div>
+
+  <ol class="toc-list reveal">
+    <li class="toc-l1">
+      <a href="#concevoir"><span class="toc-num">1.</span>Compétence — Concevoir</a>
+    </li>
+    <ol class="toc-l2">
+      <li><a href="#c1-ac1"><span class="toc-num">1.1</span>C1-N1-AC1 — Produire une analyse fonctionnelle d'un système simple</a></li>
+      <li><a href="#c1-ac2"><span class="toc-num">1.2</span>C1-N1-AC2 — Réaliser un prototype pour des solutions techniques matériel et/ou logiciel</a></li>
+      <li><a href="#c1-ac3"><span class="toc-num">1.3</span>C1-N1-AC3 — Rédiger un dossier de fabrication à partir d'un dossier de conception</a></li>
+    </ol>
+
+    <li class="toc-l1">
+      <a href="#verifier"><span class="toc-num">2.</span>Compétence — Vérifier</a>
+    </li>
+    <ol class="toc-l2">
+      <li><a href="#c2-ac1"><span class="toc-num">2.1</span>C2-N1-AC1 — Appliquer une procédure d'essais</a></li>
+      <li><a href="#c2-ac2"><span class="toc-num">2.2</span>C2-N1-AC2 — Identifier un dysfonctionnement</a></li>
+      <li><a href="#c2-ac3"><span class="toc-num">2.3</span>C2-N1-AC3 — Décrire les effets d'un dysfonctionnement</a></li>
+    </ol>
+
+    <li class="toc-l1">
+      <a href="#bilan"><span class="toc-num">3.</span>Bilan &amp; Perspectives</a>
+    </li>
+    <ol class="toc-l2">
+      <li><a href="#bilan"><span class="toc-num">3.1</span>Points forts</a></li>
+      <li><a href="#bilan"><span class="toc-num">3.2</span>Points à améliorer</a></li>
+      <li><a href="#bilan"><span class="toc-num">3.3</span>Objectifs pour le semestre 2</a></li>
+    </ol>
+  </ol>
+</section>
+
+<!-- =============================================== -->
+<!-- 1. COMPÉTENCE CONCEVOIR                         -->
+<!-- =============================================== -->
+<section class="competence-section concevoir-section" id="concevoir">
+  <div class="comp-header reveal">
+    <span class="section-num">1.</span>
+    <div class="section-tag">Semestre 1 — SAÉ1</div>
+    <h2 class="section-title">Compétence :<br><em>Concevoir</em></h2>
+    <p class="comp-intro">Conseil au client, chiffrage pour la réalisation d'un prototype ou d'un système industriel en GEII, et conception d'un prototype à partir d'un cahier des charges partiel.</p>
+  </div>
+
+  <!-- CRITÈRES ATTENDUS -->
+  <div class="criteres-attendus reveal">
+    <h3 class="sub-title">Critères Attendus</h3>
+    <div class="criteres-list">
+      <div class="critere-badge">
+        <span class="critere-code">C1E1</span>
+        <span class="critere-text">En adoptant une approche holistique intégrant les innovations technologiques en lien avec la stratégie de l'entreprise pour répondre à un besoin client.</span>
+      </div>
+      <div class="critere-badge">
+        <span class="critere-code">C1E2</span>
+        <span class="critere-text">En produisant l'ensemble des documents nécessaires pour le client et les différents prestataires.</span>
+      </div>
+      <div class="critere-badge">
+        <span class="critere-code">C1E3</span>
+        <span class="critere-text">En communiquant de façon adaptée avec les différents acteurs avant et pendant la phase de conception.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLEAU D'AUTOÉVALUATION C1 -->
+  <div class="reveal">
+    <h3 class="sub-title" style="margin-top:48px;">Tableau d'autoévaluation — Compétence Concevoir</h3>
+    <div class="autoeval-wrapper">
+      <table class="autoeval-table">
+        <thead>
+          <tr>
+            <th class="col-ap">Apprentissage critique / détaillé</th>
+            <th class="col-niv">Pas maîtrisé</th>
+            <th class="col-niv">En partie maîtrisé</th>
+            <th class="col-niv">Bien maîtrisé</th>
+            <th>Trace UNCloud</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ac-row"><td colspan="5">C1-N1-AC1 — Produire une analyse fonctionnelle d'un système simple</td></tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°1</div>
+              <div class="ap-detail">Analyse fonctionnelle du détecteur infra-rouge — comprendre les fonctions de base de l'électronique</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td><a href="#c1-ac1-ap1" class="autoeval-link">Voir la preuve ↓</a></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°2</div>
+              <div class="ap-detail">Décrire fonctionnellement l'application demandée (machine à états + supervision PC)</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td><a href="#c1-ac1-ap2" class="autoeval-link">Voir la preuve ↓</a></td>
+          </tr>
+
+          <tr class="ac-row"><td colspan="5">C1-N1-AC2 — Réaliser un prototype pour des solutions techniques matériel et/ou logiciel</td></tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°1</div>
+              <div class="ap-detail">Réalisation du détecteur IR — KiCad, routage, brasage CMS &amp; traversant</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td class="niv-cell empty">—</td>
+            <td><a href="#c1-ac2-ap1" class="autoeval-link">Voir la preuve ↓</a></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°2</div>
+              <div class="ap-detail">Écrire le programme décrivant une machine à états</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td><a href="#c1-ac2-ap2" class="autoeval-link">Voir la preuve ↓</a></td>
+          </tr>
+
+          <tr class="ac-row"><td colspan="5">C1-N1-AC3 — Rédiger un dossier de fabrication à partir d'un dossier de conception</td></tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°1</div>
+              <div class="ap-detail">Rédiger un dossier de fabrication d'une carte électronique</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td><a href="https://uncloud.univ-nantes.fr/index.php/s/def8KiNpAZFn7QA" class="autoeval-link" target="_blank">Dossier de fabrication ↗</a></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°2</div>
+              <div class="ap-detail">Rédiger une fiche expliquant le fonctionnement de l'algorithme</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td><a href="#c1-ac3-ap2" class="autoeval-link">Voir la preuve ↓</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 1.1 AC1 -->
+  <div class="ac-block reveal" id="c1-ac1">
+    <div class="ac-header">
+      <span class="ac-num">1.1</span>
+      <span class="ac-code">C1-N1-AC1</span>
+      <span class="ac-title">Produire une analyse fonctionnelle d'un système simple</span>
+    </div>
+
+    <!-- 1.1.1 -->
+    <div class="ap-card" id="c1-ac1-ap1">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>1.1.1</strong>Apprentissage détaillé n°1</div>
+          <ul class="ap-items">
+            <li>L'analyse fonctionnelle du détecteur infra-rouge de la SAÉ1 est fournie</li>
+            <li>Comprendre les fonctions de base de l'électronique</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge bien">✓ Bien maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>Le schéma fonctionnel du détecteur infrarouge était déjà donné dans le cahier des charges, je ne l'ai donc pas fait moi-même. Mon travail a été de prendre le temps de le comprendre avant d'attaquer le KiCad.</p>
+        <p>J'ai repris les blocs un par un en suivant le signal&nbsp;: l'astable FS1.1 qui génère le 10&nbsp;kHz, la LED IR (FS1.2) qui émet, la photodiode (FS1.3) qui reçoit, puis le filtrage et l'amplification (FS1.4 à FS1.6) et enfin le comparateur FS1.7 qui sort un état logique. Au début ça restait abstrait, mais en suivant le parcours du signal j'ai fini par comprendre que quand le train coupe le faisceau, la sortie bascule.</p>
+        <p>Je ne maîtrise pas encore tout dans le détail, mais j'ai bien compris le fonctionnement global du détecteur, ce qui m'a aidé à ne pas placer les composants au hasard sur la carte et à savoir à quoi servait chaque partie.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>Pour aller plus loin, j'aimerais comprendre encore mieux le rôle du filtre passe-bande 10&nbsp;kHz et pourquoi cette fréquence a été choisie plutôt qu'une autre. C'est la partie de l'analyse qui me reste la plus floue, et ça pourrait me servir si un jour je dois adapter ce détecteur à un autre type de signal.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 1</span>Schéma fonctionnel du détecteur infrarouge (extrait du cahier des charges)</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/schema_fonctionnel_sae1.jpg" alt="Schéma fonctionnel du détecteur infrarouge - extrait du cahier des charges SAE1" style="max-width:100%;background:#fff;border-radius:4px;" />
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 2</span>Photo de la maquette du détecteur infrarouge réalisée pour la SAÉ1</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/maquette_sae1.jpg" alt="Photo de la maquette du détecteur infrarouge réalisée pour la SAE1" style="max-width:100%;border-radius:4px;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.1.2 -->
+    <div class="ap-card" id="c1-ac1-ap2">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>1.1.2</strong>Apprentissage détaillé n°2</div>
+          <ul class="ap-items">
+            <li>Le détecteur infra-rouge est intégré dans un système complet&nbsp;: programme sous forme de machine à états sur microcontrôleur (C en environnement Arduino) et liaison avec PC (supervision)</li>
+            <li>Décrire fonctionnellement l'application demandée</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge bien">✓ Bien maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>Avant de coder, j'ai listé toutes les entrées (les 3 capteurs dpG, dpC, dpD) et la sortie (la barrière ouverte ou fermée). J'ai aussi décrit ce que le programme devait faire&nbsp;: fermer la barrière quand un train arrive, attendre qu'il passe au centre, puis rouvrir quand il est parti. Cette analyse avant de coder m'a évité plein d'erreurs, parce que quand je suis passé au code C j'avais déjà une idée claire de la logique à suivre.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>Mon analyse fonctionnelle reste centrée sur ce projet précis. Pour progresser, je voudrais m'entraîner à faire ce genre d'analyse sur d'autres systèmes que je ne connais pas encore, pour être capable de m'adapter à n'importe quel cahier des charges.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 3</span>Tableau des entrées / sorties du système</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <table class="fiche-table">
+            <thead>
+              <tr><th>Signal</th><th>Type</th><th>Source / destination</th><th>Rôle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>dpG</td><td>Entrée TOR</td><td>Détecteur IR gauche</td><td>Détecte le train côté gauche</td></tr>
+              <tr><td>dpC</td><td>Entrée TOR</td><td>Détecteur IR centre</td><td>Détecte le train sous la barrière</td></tr>
+              <tr><td>dpD</td><td>Entrée TOR</td><td>Détecteur IR droit</td><td>Détecte le train côté droit</td></tr>
+              <tr><td>Barrière</td><td>Sortie</td><td>Servomoteur</td><td>Commande OUVRE / FERME</td></tr>
+              <tr><td>Liaison série</td><td>Entrée / Sortie</td><td>PC supervision</td><td>Affiche l'état courant du système</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 4</span>Schéma fonctionnel du système complet</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <svg width="100%" viewBox="0 0 720 360" style="max-width:100%;background:#fff;border-radius:4px;" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrowSys" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </marker>
+            </defs>
+
+            <rect x="20" y="40" width="170" height="48" rx="6" fill="#185FA5" stroke="#0C447C" stroke-width="0.5"/>
+            <text font-family="sans-serif" font-size="13" font-weight="600" fill="#fff" x="105" y="60" text-anchor="middle">Détecteur IR gauche</text>
+            <text font-family="sans-serif" font-size="11" fill="#b5d4f4" x="105" y="76" text-anchor="middle">dpG</text>
+
+            <rect x="20" y="156" width="170" height="48" rx="6" fill="#185FA5" stroke="#0C447C" stroke-width="0.5"/>
+            <text font-family="sans-serif" font-size="13" font-weight="600" fill="#fff" x="105" y="176" text-anchor="middle">Détecteur IR centre</text>
+            <text font-family="sans-serif" font-size="11" fill="#b5d4f4" x="105" y="192" text-anchor="middle">dpC</text>
+
+            <rect x="20" y="272" width="170" height="48" rx="6" fill="#185FA5" stroke="#0C447C" stroke-width="0.5"/>
+            <text font-family="sans-serif" font-size="13" font-weight="600" fill="#fff" x="105" y="292" text-anchor="middle">Détecteur IR droit</text>
+            <text font-family="sans-serif" font-size="11" fill="#b5d4f4" x="105" y="308" text-anchor="middle">dpD</text>
+
+            <rect x="280" y="120" width="180" height="120" rx="8" fill="#1a2740" stroke="#c9a84c" stroke-width="1.5"/>
+            <text font-family="sans-serif" font-size="14" font-weight="700" fill="#c9a84c" x="370" y="160" text-anchor="middle">Microcontrôleur</text>
+            <text font-family="sans-serif" font-size="11" fill="#fff" x="370" y="180" text-anchor="middle">Arduino</text>
+            <text font-family="sans-serif" font-size="10" fill="#8a9ab5" x="370" y="206" text-anchor="middle">Machine à états</text>
+            <text font-family="sans-serif" font-size="10" fill="#8a9ab5" x="370" y="220" text-anchor="middle">(programme C)</text>
+
+            <path d="M190 64 L280 150" fill="none" stroke="#555" stroke-width="1.2" marker-end="url(#arrowSys)"/>
+            <path d="M190 180 L280 180" fill="none" stroke="#555" stroke-width="1.2" marker-end="url(#arrowSys)"/>
+            <path d="M190 296 L280 210" fill="none" stroke="#555" stroke-width="1.2" marker-end="url(#arrowSys)"/>
+
+            <rect x="540" y="60" width="160" height="60" rx="6" fill="#1D9E75" stroke="#0F6E56" stroke-width="0.5"/>
+            <text font-family="sans-serif" font-size="13" font-weight="600" fill="#fff" x="620" y="82" text-anchor="middle">Servomoteur</text>
+            <text font-family="sans-serif" font-size="11" fill="#c8f7e8" x="620" y="100" text-anchor="middle">Barrière OUVRE / FERME</text>
+
+            <rect x="540" y="240" width="160" height="60" rx="6" fill="#BA7517" stroke="#854F0B" stroke-width="0.5"/>
+            <text font-family="sans-serif" font-size="13" font-weight="600" fill="#fff" x="620" y="262" text-anchor="middle">PC supervision</text>
+            <text font-family="sans-serif" font-size="11" fill="#fac775" x="620" y="280" text-anchor="middle">Affichage de l'état</text>
+
+            <path d="M460 150 L540 100" fill="none" stroke="#555" stroke-width="1.2" marker-end="url(#arrowSys)"/>
+            <text font-family="sans-serif" font-size="11" fill="#555" x="500" y="118" text-anchor="middle">commande</text>
+
+            <path d="M460 210 L540 260" fill="none" stroke="#555" stroke-width="1.2" marker-end="url(#arrowSys)" marker-start="url(#arrowSys)"/>
+            <text font-family="sans-serif" font-size="11" fill="#555" x="500" y="248" text-anchor="middle">liaison série</text>
+
+            <text font-family="sans-serif" font-size="10" letter-spacing="2" fill="#8a9ab5" x="105" y="20" text-anchor="middle">ENTRÉES</text>
+            <text font-family="sans-serif" font-size="10" letter-spacing="2" fill="#8a9ab5" x="370" y="110" text-anchor="middle">TRAITEMENT</text>
+            <text font-family="sans-serif" font-size="10" letter-spacing="2" fill="#8a9ab5" x="620" y="40" text-anchor="middle">SORTIES</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.2 AC2 -->
+  <div class="ac-block reveal" id="c1-ac2">
+    <div class="ac-header">
+      <span class="ac-num">1.2</span>
+      <span class="ac-code">C1-N1-AC2</span>
+      <span class="ac-title">Réaliser un prototype pour des solutions techniques matériel et/ou logiciel</span>
+    </div>
+
+    <!-- 1.2.1 -->
+    <div class="ap-card" id="c1-ac2-ap1">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>1.2.1</strong>Apprentissage détaillé n°1</div>
+          <ul class="ap-items">
+            <li>Réalisation du détecteur infra-rouge</li>
+            <li>Utiliser un logiciel de conception de carte électronique (saisie de schéma, routage)</li>
+            <li>Assembler les composants sur un circuit imprimé (CMS, traversant)</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge partiel">⚠ Partiellement maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>J'ai fait toutes les étapes de fabrication de ma carte&nbsp;: d'abord la saisie du schéma sur KiCad, ensuite le routage du PCB (placer les composants et tracer les pistes), puis le soudage. La partie soudage était la plus dure, surtout pour les CMS en boîtier 0805 qui sont tout petits. J'ai dû m'appliquer pour ne pas faire de court-circuit entre les pistes. Cette expérience m'a appris qu'il faut être précis à chaque étape, sinon la carte ne fonctionne pas à la fin.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>Je mets en partiellement maîtrisé parce que mon routage a été repris plusieurs fois avant que les pistes d'alimentation et le plan de masse soient corrects. Au S2, je veux arriver à router une carte du premier coup en respectant toutes les bonnes pratiques.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 5</span>Schéma KiCad — Détecteur de présence train miniature</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/image13.png" alt="Schéma KiCad - Détecteur de présence train miniature" />
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 6</span>Routage PCB sous KiCad — Placement des composants et tracé des pistes</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/image14.jpg" alt="Routage PCB sous KiCad - Placement des composants et tracé des pistes" />
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 7</span>Carte soudée — Vue de dessus (CMS soudés)</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/image15.jpg" alt="Carte soudée vue de dessus avec composants CMS" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.2.2 -->
+    <div class="ap-card" id="c1-ac2-ap2">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>1.2.2</strong>Apprentissage détaillé n°2</div>
+          <ul class="ap-items">
+            <li>Écrire le programme décrivant une machine à états</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge bien">✓ Bien maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>J'ai écrit mon programme sous forme de machine à états avec un <code>switch/case</code> en C. Chaque état (ATTENTE, TRAIN_G, TRAIN_D, PASSAGE, SORTIE) a ses propres conditions pour passer à l'état suivant, ce qui correspond directement au graphe d'états que j'avais conçu. J'ai aussi séparé mon programme en deux fonctions&nbsp;: <code>Transitions_Barriere</code> (qui calcule l'état suivant) et <code>Sorties_Barriere</code> (qui pilote la barrière), ce qui rend le code plus lisible et plus facile à tester.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>Ma machine à états marche bien, mais elle ne fait que 5 états — c'était largement suffisant pour ce projet. J'aimerais coder des machines à états plus complexes, avec plus d'états ou des sous-états, pour être à l'aise sur des projets plus gros.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 8</span>Extrait de code C — Implémentation de la machine à états (switch/case)</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/switch_case.png" alt="Code C switch/case de la fonction Transitions_Barriere avec les états ATTENTE, TRAIN_G, TRAIN_D, PASSAGE, SORTIE" style="max-height:none;" />
+        </div>
+        <a href="https://docs.google.com/document/d/1KpAsqfHTXZKwE9itJ5EUQ-zprY9OzsOE4vtL9p6pyEw/edit?usp=sharing" target="_blank" class="uncloud-btn" style="margin-top:16px;">💻 Voir le code source commenté (Google Doc)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.3 AC3 -->
+  <div class="ac-block reveal" id="c1-ac3">
+    <div class="ac-header">
+      <span class="ac-num">1.3</span>
+      <span class="ac-code">C1-N1-AC3</span>
+      <span class="ac-title">Rédiger un dossier de fabrication à partir d'un dossier de conception</span>
+    </div>
+
+    <!-- 1.3.1 -->
+    <div class="ap-card" id="c1-ac3-ap1">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>1.3.1</strong>Apprentissage détaillé n°1</div>
+          <ul class="ap-items">
+            <li>Rédiger un dossier de fabrication d'une carte électronique</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge bien">✓ Bien maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>Pour le dossier de fabrication, j'ai dû rassembler tous les fichiers nécessaires&nbsp;: le schéma KiCad, le routage du PCB, et la liste des composants (BOM) avec leurs références Farnell. J'ai vérifié que tout était cohérent entre le schéma et la carte. Ça m'a aussi montré qu'un dossier bien organisé permet de retrouver facilement ses fichiers plus tard et de ne pas perdre de temps quand on en a besoin.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>J'aimerais apprendre à faire un dossier de fabrication pour une carte plus compliquée, avec plus de composants ou plusieurs couches, pour voir ce qui change par rapport à ma carte simple.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Trace</span>Dossier de fabrication carte — UNCloud</p>
+        <a href="https://uncloud.univ-nantes.fr/index.php/s/def8KiNpAZFn7QA" target="_blank" class="uncloud-btn">📄 Voir le dossier de fabrication</a>
+      </div>
+    </div>
+
+    <!-- 1.3.2 -->
+    <div class="ap-card" id="c1-ac3-ap2">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>1.3.2</strong>Apprentissage détaillé n°2</div>
+          <ul class="ap-items">
+            <li>Rédiger une fiche expliquant le fonctionnement de l'algorithme</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge bien">✓ Bien maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>Pour expliquer comment marche mon programme, j'ai fait une fiche complète qui contient un diagramme d'états dessiné, la liste des 5 états avec leur rôle, le tableau des transitions et les tests que j'ai prévus. Le plus dur a été de trouver les bons mots pour décrire ce que fait chaque partie sans utiliser trop de termes techniques.</p>
+        <p>En faisant cette fiche, je me suis aussi rendu compte que j'avais du mal à bien gérer certaines boucles dans mon code. Du coup, en simplifiant mes explications, j'ai aussi simplifié mon programme, ce qui l'a rendu plus lisible et plus facile à débugger.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>Maintenant que j'ai fait une fiche complète pour ce projet, j'aimerais apprendre à faire le même travail pour des programmes plus gros, avec plus d'états et plus de fonctions, où il faudra bien organiser la fiche pour qu'elle reste lisible.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 9</span>Fiche technique — Fonctionnement de l'algorithme</p>
+        <div class="fiche-algo">
+
+          <div class="fiche-section">
+            <div class="fiche-titre">Diagramme d'états</div>
+            <svg width="100%" viewBox="0 0 720 660" xmlns="http://www.w3.org/2000/svg" style="background:#fff;border-radius:4px;font-family:sans-serif;display:block;max-width:420px;margin:0 auto;">
+              <defs>
+                <marker id="arrSt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 Z" fill="#444"/>
+                </marker>
+              </defs>
+
+              <!-- Indicateur état initial -->
+              <circle cx="360" cy="8" r="4" fill="#444"/>
+              <line x1="360" y1="12" x2="360" y2="26" stroke="#444" stroke-width="1.5" marker-end="url(#arrSt)"/>
+
+              <!-- ATTENTE -->
+              <rect x="290" y="30" width="140" height="60" rx="8" fill="#1D9E75" stroke="#0F6E56" stroke-width="0.5"/>
+              <text x="360" y="55" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">ATTENTE</text>
+              <text x="360" y="75" text-anchor="middle" fill="#c8f7e8" font-size="11">Barrière OUVRE</text>
+
+              <!-- TRAIN_G -->
+              <rect x="70" y="190" width="140" height="60" rx="8" fill="#185FA5" stroke="#0C447C" stroke-width="0.5"/>
+              <text x="140" y="215" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">TRAIN_G</text>
+              <text x="140" y="235" text-anchor="middle" fill="#b5d4f4" font-size="11">Barrière FERME</text>
+
+              <!-- TRAIN_D -->
+              <rect x="510" y="190" width="140" height="60" rx="8" fill="#185FA5" stroke="#0C447C" stroke-width="0.5"/>
+              <text x="580" y="215" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">TRAIN_D</text>
+              <text x="580" y="235" text-anchor="middle" fill="#b5d4f4" font-size="11">Barrière FERME</text>
+
+              <!-- PASSAGE -->
+              <rect x="290" y="350" width="140" height="60" rx="8" fill="#BA7517" stroke="#854F0B" stroke-width="0.5"/>
+              <text x="360" y="375" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">PASSAGE</text>
+              <text x="360" y="395" text-anchor="middle" fill="#fac775" font-size="11">Barrière FERME</text>
+
+              <!-- SORTIE -->
+              <rect x="290" y="510" width="140" height="60" rx="8" fill="#993C1D" stroke="#5D2412" stroke-width="0.5"/>
+              <text x="360" y="535" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">SORTIE</text>
+              <text x="360" y="555" text-anchor="middle" fill="#f7c5b3" font-size="11">Barrière OUVRE</text>
+
+              <!-- ATTENTE → TRAIN_G -->
+              <path d="M 305,90 Q 200,140 165,190" fill="none" stroke="#444" stroke-width="1.5" marker-end="url(#arrSt)"/>
+              <text x="220" y="135" text-anchor="middle" fill="#1a2740" font-size="11" font-weight="600">dpG=0</text>
+
+              <!-- ATTENTE → TRAIN_D -->
+              <path d="M 415,90 Q 520,140 555,190" fill="none" stroke="#444" stroke-width="1.5" marker-end="url(#arrSt)"/>
+              <text x="500" y="135" text-anchor="middle" fill="#1a2740" font-size="11" font-weight="600">dpD=0</text>
+
+              <!-- TRAIN_G → PASSAGE -->
+              <path d="M 200,250 Q 270,300 310,350" fill="none" stroke="#444" stroke-width="1.5" marker-end="url(#arrSt)"/>
+              <text x="225" y="298" text-anchor="middle" fill="#1a2740" font-size="11" font-weight="600">dpC=0</text>
+
+              <!-- TRAIN_D → PASSAGE -->
+              <path d="M 520,250 Q 450,300 410,350" fill="none" stroke="#444" stroke-width="1.5" marker-end="url(#arrSt)"/>
+              <text x="495" y="298" text-anchor="middle" fill="#1a2740" font-size="11" font-weight="600">dpC=0</text>
+
+              <!-- PASSAGE → SORTIE -->
+              <path d="M 360,410 L 360,510" fill="none" stroke="#444" stroke-width="1.5" marker-end="url(#arrSt)"/>
+              <text x="385" y="465" text-anchor="start" fill="#1a2740" font-size="11" font-weight="600">dpC=1</text>
+
+              <!-- SORTIE → ATTENTE (loop back, droite) -->
+              <path d="M 430,540 Q 690,540 690,300 Q 690,60 430,60" fill="none" stroke="#444" stroke-width="1.5" marker-end="url(#arrSt)"/>
+              <text x="655" y="293" text-anchor="middle" fill="#1a2740" font-size="11" font-weight="600">dpG=1 ET</text>
+              <text x="655" y="308" text-anchor="middle" fill="#1a2740" font-size="11" font-weight="600">dpD=1</text>
+            </svg>
+          </div>
+
+          <div class="fiche-section">
+            <div class="fiche-titre">Objectif du programme</div>
+            <p class="fiche-texte">Automatiser une barrière ferroviaire en fonction de la position d'un train détectée par 3 capteurs&nbsp;: <strong>dpG</strong> (gauche), <strong>dpC</strong> (centre), <strong>dpD</strong> (droite). La barrière se ferme à l'approche et s'ouvre après le passage complet.</p>
+          </div>
+
+          <div class="fiche-section">
+            <div class="fiche-titre">Les 5 états de la machine</div>
+            <div class="fiche-etats">
+              <div class="fiche-etat etat-vert">
+                <span class="etat-nom">ATTENTE</span>
+                <span class="etat-desc">Barrière ouverte — aucun train détecté</span>
+              </div>
+              <div class="fiche-etat etat-bleu">
+                <span class="etat-nom">TRAIN_G</span>
+                <span class="etat-desc">Train détecté à gauche (dpG=0) — barrière se ferme</span>
+              </div>
+              <div class="fiche-etat etat-bleu">
+                <span class="etat-nom">TRAIN_D</span>
+                <span class="etat-desc">Train détecté à droite (dpD=0) — barrière se ferme</span>
+              </div>
+              <div class="fiche-etat etat-orange">
+                <span class="etat-nom">PASSAGE</span>
+                <span class="etat-desc">Train au centre (dpC=0) — fusion des deux directions, barrière reste fermée</span>
+              </div>
+              <div class="fiche-etat etat-coral">
+                <span class="etat-nom">SORTIE</span>
+                <span class="etat-desc">Train passé (dpC=1) — barrière s'ouvre, on attend que les côtés soient libres</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="fiche-section">
+            <div class="fiche-titre">Logique des transitions (Transitions_Barriere)</div>
+            <table class="fiche-table">
+              <thead>
+                <tr><th>État actuel</th><th>Condition capteurs</th><th>État suivant</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>ATTENTE</td><td>dpG=0</td><td>TRAIN_G</td></tr>
+                <tr><td>ATTENTE</td><td>dpD=0</td><td>TRAIN_D</td></tr>
+                <tr><td>TRAIN_G</td><td>dpC=0</td><td>PASSAGE</td></tr>
+                <tr><td>TRAIN_D</td><td>dpC=0</td><td>PASSAGE</td></tr>
+                <tr><td>PASSAGE</td><td>dpC=1</td><td>SORTIE</td></tr>
+                <tr><td>SORTIE</td><td>dpG=1 ET dpD=1</td><td>ATTENTE</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="fiche-section">
+            <div class="fiche-titre">Sorties physiques (Sorties_Barriere)</div>
+            <div class="fiche-sorties">
+              <div class="sortie-item sortie-fermee">
+                <span>🔴 Barrière FERMÉE</span>
+                <span class="sortie-etats">États : TRAIN_G, TRAIN_D, PASSAGE</span>
+              </div>
+              <div class="sortie-item sortie-ouverte">
+                <span>🟢 Barrière OUVERTE</span>
+                <span class="sortie-etats">États : ATTENTE, SORTIE</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="fiche-section">
+            <div class="fiche-titre">Tests unitaires intégrés</div>
+            <p class="fiche-texte">Avant le lancement, le programme valide automatiquement 7 cas critiques&nbsp;:</p>
+            <ul class="fiche-liste">
+              <li>ATTENTE → dpG=0 → doit passer à TRAIN_G ✓</li>
+              <li>ATTENTE → dpD=0 → doit passer à TRAIN_D ✓</li>
+              <li>ATTENTE → tous à 1 → doit rester ATTENTE ✓</li>
+              <li>TRAIN_G → dpC=0 → doit passer à PASSAGE ✓</li>
+              <li>TRAIN_D → dpC=0 → doit passer à PASSAGE ✓</li>
+              <li>PASSAGE → dpC=1 → doit passer à SORTIE ✓</li>
+              <li>SORTIE → tout à 1 → retour à ATTENTE ✓</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================== -->
+<!-- 2. COMPÉTENCE VÉRIFIER                          -->
+<!-- =============================================== -->
+<section class="competence-section" id="verifier">
+  <div class="comp-header reveal">
+    <span class="section-num">2.</span>
+    <div class="section-tag">Semestre 1 — SAÉ1</div>
+    <h2 class="section-title">Compétence :<br><em>Vérifier</em></h2>
+    <p class="comp-intro">Mise en place d'un protocole de tests et de mesures dans les domaines de la gestion, production et maîtrise de l'énergie, les process industriels et les systèmes embarqués.</p>
+  </div>
+
+  <!-- CRITÈRES ATTENDUS -->
+  <div class="criteres-attendus reveal">
+    <h3 class="sub-title">Critères Attendus</h3>
+    <div class="criteres-list">
+      <div class="critere-badge">
+        <span class="critere-code">C2E1</span>
+        <span class="critere-text">En tenant compte des spécificités matérielles, réglementaires et contextuelles.</span>
+      </div>
+      <div class="critere-badge">
+        <span class="critere-code">C2E2</span>
+        <span class="critere-text">En mettant en œuvre un plan d'essais et d'évaluations, dans une visée d'analyse qualitative et corrective.</span>
+      </div>
+      <div class="critere-badge">
+        <span class="critere-code">C2E3</span>
+        <span class="critere-text">En tenant compte des enjeux économiques, environnementaux et réglementaires de la société.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLEAU D'AUTOÉVALUATION C2 -->
+  <div class="reveal">
+    <h3 class="sub-title" style="margin-top:48px;">Tableau d'autoévaluation — Compétence Vérifier</h3>
+    <div class="autoeval-wrapper">
+      <table class="autoeval-table">
+        <thead>
+          <tr>
+            <th class="col-ap">Apprentissage critique / détaillé</th>
+            <th class="col-niv">Pas maîtrisé</th>
+            <th class="col-niv">En partie maîtrisé</th>
+            <th class="col-niv">Bien maîtrisé</th>
+            <th>Trace UNCloud</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ac-row"><td colspan="5">C2-N1-AC1 — Appliquer une procédure d'essais</td></tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°1</div>
+              <div class="ap-detail">Tests des niveaux de tension et tests unitaires sur la carte IR</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td><a href="#c2-ac1-ap1" class="autoeval-link">Voir la preuve ↓</a></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°2</div>
+              <div class="ap-detail">Tests du programme (graphe d'états) par simulation externe</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td class="niv-cell empty">—</td>
+            <td><a href="#c2-ac1-ap2" class="autoeval-link">Voir la preuve ↓</a></td>
+          </tr>
+
+          <tr class="ac-row"><td colspan="5">C2-N1-AC2 — Identifier un dysfonctionnement</td></tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°1 (carte)</div>
+              <div class="ap-detail">Continuité, alimentation, niveaux aux points de test</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td><a href="#c2-ac2-ap1" class="autoeval-link">Voir la preuve ↓</a></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°2 (programme)</div>
+              <div class="ap-detail">Erreurs de syntaxe, initialisations, conditions de boucles</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td class="niv-cell empty">—</td>
+            <td><a href="#c2-ac2-ap2" class="autoeval-link">Voir la preuve ↓</a></td>
+          </tr>
+
+          <tr class="ac-row"><td colspan="5">C2-N1-AC3 — Décrire les effets d'un dysfonctionnement</td></tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°1</div>
+              <div class="ap-detail">Effet thermique, composants défectueux, court-circuit, fonctionnalité non remplie</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td><a href="#c2-ac3-ap1" class="autoeval-link">Voir la preuve ↓</a></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ap-name">Apprentissage détaillé n°2</div>
+              <div class="ap-detail">Résultat erroné, boucle infinie, blocage du programme</div>
+            </td>
+            <td class="niv-cell empty">—</td>
+            <td class="niv-cell">✓</td>
+            <td class="niv-cell empty">—</td>
+            <td><a href="#c2-ac3-ap2" class="autoeval-link">Voir la preuve ↓</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2.1 AC1 -->
+  <div class="ac-block reveal" id="c2-ac1">
+    <div class="ac-header">
+      <span class="ac-num">2.1</span>
+      <span class="ac-code">C2-N1-AC1</span>
+      <span class="ac-title">Appliquer une procédure d'essais</span>
+    </div>
+
+    <!-- 2.1.1 -->
+    <div class="ap-card" id="c2-ac1-ap1">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>2.1.1</strong>Apprentissage détaillé n°1</div>
+          <ul class="ap-items">
+            <li>Tests des niveaux de tension sur les points de tests de la carte à détecteur infra-rouge</li>
+            <li>Tests unitaires (test de chaque fonction de l'entrée à la sortie)</li>
+            <li>Tests d'intégration (test de l'ensemble)</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge bien">✓ Bien maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>Pour savoir si ma carte infrarouge marchait bien, j'ai fait les tests étape par étape. J'ai commencé par vérifier au multimètre que les alimentations +5&nbsp;V et −5&nbsp;V arrivaient bien sur la carte. Ensuite, avec l'oscilloscope, j'ai vérifié chaque point de test (TP1 à TP7) pour voir si le signal passait correctement de l'entrée à la sortie. Ça m'a permis de valider que chaque bloc fonctionnait avant de tester l'ensemble.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>Pour aller plus loin, j'aimerais appliquer la même démarche de tests sur d'autres cartes plus complexes, parce que là j'avais une fiche qui me guidait point par point.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 10</span>Tests oscilloscope — Carte IR (Fiche FS1.6 et mesures)</p>
+        <div class="ap-images-grid">
+          <img src="images/image01.png" alt="Fiche de test FS1.6" />
+          <img src="images/image02.png" alt="Mesures oscilloscope" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.1.2 -->
+    <div class="ap-card" id="c2-ac1-ap2">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>2.1.2</strong>Apprentissage détaillé n°2</div>
+          <ul class="ap-items">
+            <li>Tests du programme (graphe d'états) par simulation externe</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge partiel">⚠ Partiellement maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>Pour tester mon programme avant de l'utiliser avec un vrai train, j'ai écrit deux fonctions de test (<code>Test_Transitions_Barriere</code> et <code>Test_Sorties_Barriere</code>) qui imposent des valeurs aux capteurs (dpG, dpC, dpD) dans le code, au lieu de lire les vrais capteurs. Je les ai lancées sur l'Arduino et j'ai regardé les résultats sur le moniteur série pour vérifier que la machine à états passait bien aux bons états prévus par mon graphe. Je n'ai pas gardé de capture du moniteur série pendant ces tests, mais voici le tableau récapitulatif des cas que j'ai testés.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>J'aimerais aussi tester plus de cas limites, par exemple quand deux capteurs changent en même temps ou quand un capteur reste bloqué tout le temps. Pour l'instant je n'ai testé que des cas où les capteurs changent dans un ordre logique. Pour mes prochains projets, je ferai aussi attention à toujours garder des captures du moniteur série pendant mes tests, pour avoir des preuves vérifiables.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 11</span>Tableau des scénarios de simulation testés</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <table class="fiche-table">
+            <thead>
+              <tr>
+                <th>Scénario</th>
+                <th>dpG</th>
+                <th>dpC</th>
+                <th>dpD</th>
+                <th>État attendu</th>
+                <th>État obtenu</th>
+                <th>Résultat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Voie libre (initial)</td><td>1</td><td>1</td><td>1</td><td>ATTENTE</td><td>ATTENTE</td><td>✅</td></tr>
+              <tr><td>Train arrive de gauche</td><td>0</td><td>1</td><td>1</td><td>TRAIN_G</td><td>TRAIN_G</td><td>✅</td></tr>
+              <tr><td>Train arrive de droite</td><td>1</td><td>1</td><td>0</td><td>TRAIN_D</td><td>TRAIN_D</td><td>✅</td></tr>
+              <tr><td>Train sous la barrière</td><td>1</td><td>0</td><td>1</td><td>PASSAGE</td><td>PASSAGE</td><td>✅</td></tr>
+              <tr><td>Train quitte le centre</td><td>1</td><td>1</td><td>1</td><td>SORTIE</td><td>SORTIE</td><td>✅</td></tr>
+              <tr><td>Retour à l'état initial</td><td>1</td><td>1</td><td>1</td><td>ATTENTE</td><td>ATTENTE</td><td>✅</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <a href="https://docs.google.com/document/d/1KpAsqfHTXZKwE9itJ5EUQ-zprY9OzsOE4vtL9p6pyEw/edit?usp=sharing" target="_blank" class="uncloud-btn" style="margin-top:16px;">💻 Voir le code source commenté (Google Doc)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.2 AC2 -->
+  <div class="ac-block reveal" id="c2-ac2">
+    <div class="ac-header">
+      <span class="ac-num">2.2</span>
+      <span class="ac-code">C2-N1-AC2</span>
+      <span class="ac-title">Identifier un dysfonctionnement</span>
+    </div>
+
+    <!-- 2.2.1 -->
+    <div class="ap-card" id="c2-ac2-ap1">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>2.2.1</strong>Apprentissage détaillé n°1 (carte)</div>
+          <ul class="ap-items">
+            <li>Test de la continuité électrique</li>
+            <li>Tests de l'alimentation des composants</li>
+            <li>Tests des niveaux aux points de test</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge bien">✓ Bien maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>Ma carte marchait bien du premier coup, mais j'ai quand même fait toutes les mesures avec le multimètre et l'oscilloscope pour être sûr. J'ai vérifié la continuité électrique, l'alimentation de chaque composant, et j'ai comparé mes mesures aux valeurs théoriques attendues. Tout était conforme, donc j'ai pu valider que mon montage fonctionnait correctement.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>Comme ma carte n'est jamais tombée en panne, je n'ai pas vraiment fait de dépannage. Pour progresser, j'aimerais provoquer exprès des pannes (court-circuit, composant à l'envers...) et m'entraîner à les retrouver avec mes mesures.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 12</span>Carte soudée — Vue de dessus &amp; vue de dessous</p>
+        <div class="ap-images-grid">
+          <img src="images/image03.jpg" alt="Carte détecteur de présence - vue dessus" />
+          <img src="images/image04.jpg" alt="Carte détecteur de présence - vue dessous" />
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 13</span>Tableau de mesures — Continuité des alimentations</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/image05.jpg" alt="Tableau de vérification de continuité MCP6541, LMV358, LMV331" style="max-height:none;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.2.2 -->
+    <div class="ap-card" id="c2-ac2-ap2">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>2.2.2</strong>Apprentissage détaillé n°2 (programme)</div>
+          <ul class="ap-items">
+            <li>Détection d'erreurs de syntaxe</li>
+            <li>Contrôle des initialisations des variables</li>
+            <li>Contrôle des conditions des boucles pour éviter une boucle infinie</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge partiel">⚠ Partiellement maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>Quand j'ai écrit mon programme en C, j'ai fait attention à bien initialiser mes variables au début (etat = ATTENTE par exemple) pour éviter d'avoir des valeurs au hasard. J'ai aussi ajouté des conditions de sortie dans mes boucles while pour que le programme ne reste pas bloqué. Au début j'avais des boucles infinies, mais en ajoutant des tests bien placés et un état tampon SORTIE qui attend que les deux capteurs latéraux soient libres avant de revenir à ATTENTE, j'ai réussi à régler le problème.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>J'aimerais aussi apprendre à mieux anticiper les bugs avant qu'ils arrivent, en réfléchissant plus à mon code avant de le coder. Pour l'instant, je trouve mes erreurs quand le programme ne marche pas, mais sur des projets plus gros ça prendrait trop de temps.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 14</span>Extrait de code — Initialisation des variables et tests unitaires</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/image06.jpg" alt="Code C avec initialisation et tests unitaires" style="max-height:none;" />
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 15</span>Sécurité anti-boucle infinie — Code de protection</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/image07.jpg" alt="Code C de l'état tampon SORTIE qui empêche le blocage du programme" style="max-height:none;" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.3 AC3 -->
+  <div class="ac-block reveal" id="c2-ac3">
+    <div class="ac-header">
+      <span class="ac-num">2.3</span>
+      <span class="ac-code">C2-N1-AC3</span>
+      <span class="ac-title">Décrire les effets d'un dysfonctionnement</span>
+    </div>
+
+    <!-- 2.3.1 -->
+    <div class="ap-card" id="c2-ac3-ap1">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>2.3.1</strong>Apprentissage détaillé n°1</div>
+          <ul class="ap-items">
+            <li>Effet thermique</li>
+            <li>Composants défectueux</li>
+            <li>Court-circuit</li>
+            <li>Fonctionnalité non remplie</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge bien">✓ Bien maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>Sur ce projet, je n'ai pas eu de composant défectueux. Par contre, pendant le prototypage, quand je branchais les fils sur ma carte, j'ai créé sans le vouloir un court-circuit&nbsp;; je m'en suis vite rendu compte et je l'ai corrigé tout de suite.</p>
+        <p>J'ai aussi étudié ce qui se passerait si le filtre passe-bande 10&nbsp;kHz de ma carte IR tombait en panne&nbsp;: le signal ne serait plus filtré et le comparateur ne verrait plus passer le train. Mes mesures à l'oscilloscope l'ont confirmé&nbsp;: en mettant un obstacle, l'amplitude du signal Viu chute de 1,55&nbsp;V à 0,14&nbsp;V. Un seul composant défectueux peut donc casser toute la chaîne de détection.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>J'aimerais aussi tester ce qui se passe quand d'autres composants tombent en panne, pas seulement le filtre. Pour l'instant je n'ai étudié qu'un seul cas, mais sur une vraie carte il y a beaucoup d'autres composants qui peuvent lâcher.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 16</span>Comparaison oscilloscope — Signal normal vs signal dégradé (obstacle)</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/image08.jpg" alt="Comparaison signaux Vast et Viu avec obstacle" style="max-height:none;" />
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 17</span>Mesure du signal dégradé — Chute de 1,55 V à 0,14 V</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/image09.jpg" alt="Caractéristiques du signal Viu écrasé à 147mV" style="max-height:none;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.3.2 -->
+    <div class="ap-card" id="c2-ac3-ap2">
+      <div class="ap-top">
+        <div class="ap-left">
+          <div class="ap-num"><strong>2.3.2</strong>Apprentissage détaillé n°2</div>
+          <ul class="ap-items">
+            <li>Résultat erroné dû à une erreur de programmation (mauvaise initialisation de variables, erreurs dans une expression de calcul…)</li>
+            <li>Boucle infinie</li>
+            <li>Blocage du programme</li>
+          </ul>
+        </div>
+        <div class="ap-right"><div class="maitrise-badge partiel">⚠ Partiellement maîtrisé</div></div>
+      </div>
+      <div class="ap-arg">
+        <div class="arg-label">Argumentaire</div>
+        <p>Pendant le projet, j'ai remarqué qu'une petite erreur dans le code peut avoir de gros effets. Par exemple, une fois j'ai mis = au lieu de == dans un if, et mon programme affichait n'importe quoi. Une autre fois j'ai oublié d'incrémenter dans ma boucle, et ça tournait à l'infini. Pour éviter ces problèmes, j'ai écrit des fonctions de test (<code>Test_Transitions_Barriere</code>, <code>Test_Sorties_Barriere</code>) qui vérifient automatiquement que le programme fait bien ce qu'on attend, et qui m'avertissent dès qu'il y a un souci.</p>
+        <div class="next-step">
+          <span class="next-step-label">À approfondir</span>
+          <p>J'aimerais aussi apprendre à reconnaître le type de bug juste en regardant ce qui se passe dans le programme. Par exemple, si je vois mon programme se bloquer, est-ce que c'est forcément une boucle infinie, ou ça peut aussi venir d'une variable mal initialisée ? Pour l'instant je dois fouiller dans tout le code pour trouver, je n'arrive pas à deviner d'avance.</p>
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 18</span>Détection automatique d'erreur — Test_Transitions_Barriere</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/image10.jpg" alt="Code Test_Transitions_Barriere avec printf erreur" style="max-height:none;" />
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 19</span>Détection automatique d'erreur — Test_Sorties_Barriere</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/image11.jpg" alt="Code Test_Sorties_Barriere avec printf erreur" style="max-height:none;" />
+        </div>
+      </div>
+      <div class="ap-images">
+        <p class="ap-images-label"><span class="fig-num">Fig. 20</span>Compte-rendu SAÉ1 — Problèmes rencontrés &amp; solutions</p>
+        <div class="ap-images-grid" style="max-width:100%;">
+          <img src="images/image12.jpg" alt="Section problèmes du compte-rendu SAE1" style="max-height:none;" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- =============================================== -->
+<!-- 3. BILAN & PERSPECTIVES                         -->
+<!-- =============================================== -->
+<section class="bilan" id="bilan">
+  <div class="reveal">
+    <span class="section-num">3.</span>
+    <div class="section-tag">Analyse réflexive</div>
+    <h2 class="section-title">Bilan &amp; <em>Perspectives</em></h2>
+    <p class="bilan-intro">Cette dernière partie fait le bilan de ce que j'ai appris pendant ce semestre 1. Je liste mes points forts, mes points à améliorer, et je me fixe des objectifs pour le semestre 2. Cette analyse est importante dans un portfolio, parce que des traces sans commentaires ne prouvent rien.</p>
+  </div>
+
+  <div class="bilan-grid reveal">
+
+    <div class="bilan-card points-forts">
+      <h3>Points forts</h3>
+      <ul>
+        <li>Je sais faire toute la chaîne d'une carte électronique&nbsp;: schéma KiCad, routage, soudage, tests à l'oscilloscope.</li>
+        <li>J'ai compris comment fonctionne le détecteur infrarouge bloc par bloc (de FS1.1 à FS1.7).</li>
+        <li>J'ai écrit proprement une machine à états en C en séparant le code en deux fonctions (transitions / sorties), et j'ai documenté tout ça dans une fiche avec un diagramme d'états dessiné.</li>
+        <li>J'ai mis en place des fonctions de test (<code>Test_Transitions_Barriere</code> et <code>Test_Sorties_Barriere</code>) qui imposent des valeurs aux capteurs et vérifient automatiquement que mon programme passe bien aux bons états, sans avoir besoin d'utiliser un vrai train.</li>
+        <li>Quand j'ai eu des problèmes (court-circuit pendant le branchement, boucles infinies dans le code), j'ai su les repérer et les corriger rapidement.</li>
+      </ul>
+    </div>
+
+    <div class="bilan-card points-faibles">
+      <h3>Points à améliorer</h3>
+      <ul>
+        <li>J'ai dû refaire mon routage plusieurs fois avant qu'il respecte toutes les bonnes pratiques (plan de masse, alimentation).</li>
+        <li>Je n'ai pas gardé les captures du moniteur série pendant mes tests, donc certaines preuves sont moins solides.</li>
+        <li>Comme ma carte a marché du premier coup, je n'ai pas vraiment dépanné de panne réelle sur le matériel.</li>
+        <li>Je trouve mes bugs après coup, en regardant le code quand quelque chose ne marche pas, au lieu de les anticiper avant.</li>
+        <li>Mon vocabulaire technique est encore parfois pas assez précis dans mes comptes-rendus.</li>
+      </ul>
+    </div>
+
+    <div class="bilan-card objectifs">
+      <h3>Ce que je veux apprendre ensuite</h3>
+      <ul>
+        <li>Router une carte du premier coup en respectant toutes les bonnes pratiques.</li>
+        <li>Toujours garder les captures du moniteur série et les preuves numériques pendant mes tests.</li>
+        <li>M'entraîner à dépanner de vraies pannes en provoquant exprès des défauts sur une carte.</li>
+        <li>Apprendre à anticiper les bugs avant qu'ils arrivent, en réfléchissant mieux à mon code avant de le coder.</li>
+        <li>Tester des cas limites (deux capteurs qui changent en même temps, composants qui lâchent...) au lieu de seulement tester les cas normaux.</li>
+        <li>Améliorer mon vocabulaire technique en lisant plus de datasheets et de documentation pro.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="bilan-conclusion reveal">
+    <h3>Synthèse</h3>
+    <p>À la fin de ce semestre 1 et de la SAÉ1 sur la barrière de passage à niveau, je dirais que je suis en gros à un niveau <strong style="color:var(--gold);">bien maîtrisé</strong> sur la compétence Concevoir, et entre <strong style="color:var(--gold);">bien et partiellement maîtrisé</strong> sur la compétence Vérifier. J'ai bien progressé&nbsp;: en quelques mois, je suis passé d'une découverte des outils (KiCad, le langage C, l'oscilloscope) à la réalisation d'un système complet tout seul, du schéma jusqu'au programme automatisé.</p>
+    <p>Ce que je retiens surtout, c'est qu'il faut être rigoureux. Chaque problème que j'ai rencontré (court-circuit pendant le branchement, boucles infinies dans le code, port USB qui n'était pas le bon) m'a appris qu'il faut y aller étape par étape et tester au fur et à mesure. C'est cette méthode que je veux renforcer pour la suite, en m'attaquant à des projets plus durs et en m'entraînant à anticiper les problèmes au lieu de les corriger après coup.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-tag">Me contacter</div>
+  <h2 class="section-title">Tristan<br>Chiron</h2>
+  <p class="contact-sub">Étudiant BUT GEII — disponible pour toute question ou échange.</p>
+  <a id="contact-email-link" class="contact-email" href="#"></a>
+  <a href="tel:+33618148966" class="contact-phone">06 18 14 89 66</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Tristan Chiron — GEII G1</div>
+  <div class="footer-copy">Portfolio BUT GEII — IUT Nantes — 2025/2026</div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lightboxClose">✕</span>
+  <img id="lightboxImg" src="" alt="" />
+</div>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  reveals.forEach(el => observer.observe(el));
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+
+  // Lightbox — délégation d'événement pour fiabilité
+  document.addEventListener('click', function(e) {
+    const img = e.target.closest('.ap-images-grid img');
+    if (img) {
+      document.getElementById('lightboxImg').src = img.src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    if (e.target.id === 'lightboxClose' || e.target.id === 'lightbox') {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('active');
+  });
+
+  // Email écrit via JS pour éviter tout blocage
+  (function() {
+    var u = 'tristanchiron835';
+    var d = 'gmail.com';
+    var el = document.getElementById('contact-email-link');
+    if (el) {
+      el.href = 'mailto:' + u + '@' + d;
+      el.textContent = u + '@' + d;
+    }
+  })();
+</script>
+</body>
+</html>
